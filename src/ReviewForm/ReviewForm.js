@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import StarRate from "@material-ui/icons/StarRate";
 import Divider from "@material-ui/core/Divider";
-
-// post review.  Include questions array, vendorUuid
+import { dispatch } from "../store";
+import { Button, TextField } from "@material-ui/core";
 
 function makeStars(setQuestions, questionNumber, questions) {
   const stars = [];
@@ -47,14 +47,13 @@ function ReviewForm(props) {
       uuid: question.uuid
     }))
   );
+  const [comment, setComment] = useState("");
+
+  console.log("form props", props);
 
   return (
     <div>
-      <div>
-        Vendor name: {props.vendorUuid}
-        {props.vendorName}
-      </div>
-      <div>additional comments</div>
+      <div style={{ fontSize: "20px" }}>{props.vendorName}</div>
 
       <div>
         <Divider />
@@ -78,6 +77,40 @@ function ReviewForm(props) {
             );
           })}
         </div>
+        <div style={{ marginLeft: "10px", marginTop: "20px", maxWidth: "85%" }}>
+          <div>Additional Comments:</div>
+          <TextField
+            id="outlined-multiline-flexible"
+            fullWidth={true}
+            multiline
+            rowsMax="4"
+            value={comment}
+            onChange={e => setComment(e.target.value)}
+            className={null}
+            margin="normal"
+            variant="outlined"
+          />
+        </div>
+        <Button
+          color="primary"
+          variant="contained"
+          style={{ marginTop: "25px", marginLeft: "15px" }}
+          onClick={() => {
+            console.log("questions", {
+              questions,
+              comment,
+              vendorUuid: props.vendorUuid
+            });
+            dispatch.reviews.postReview({
+              questions,
+              comment,
+              vendorUuid: props.vendorUuid
+            });
+            props.history.push("/");
+          }}
+        >
+          Submit
+        </Button>
       </div>
     </div>
   );

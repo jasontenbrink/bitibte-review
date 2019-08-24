@@ -1,10 +1,8 @@
 import React from "react";
 import StarRate from "@material-ui/icons/StarRate";
 import Divider from "@material-ui/core/Divider";
-import { connect } from "react-redux";
-import { dispatch } from "../store";
-import { Button } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { connect, useSelector } from "react-redux";
+import { Button, Typography } from "@material-ui/core";
 
 function makeStars(starsCount) {
   const stars = [];
@@ -16,11 +14,29 @@ function makeStars(starsCount) {
     stars.push(<StarRate style={{ color: "lightgreen" }} key={starsCount} />);
   return stars;
 }
-function Review({ review }) {
-  console.log("review", review);
+function Review({ review, history, ...rest }) {
+  const user = useSelector(state => state.user);
   return review ? (
     <div>
-      <div style={{ fontSize: "24pt" }}>{review && review.name}</div>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between"
+        }}
+      >
+        <div style={{ fontSize: "24pt" }}>{review && review.name}</div>
+        <Button
+          color="primary"
+          onClick={() => {
+            user.loggedIn
+              ? history.push(`/review-form/${review.vendorUuid}/${review.name}`)
+              : history.push(`/login`);
+          }}
+        >
+          Review this Vendor
+        </Button>
+      </div>
       <Divider />
       <div style={{ marginLeft: "10px" }}>
         {review &&
@@ -42,17 +58,15 @@ function Review({ review }) {
               </div>
             );
           })}
-        <div>addition comments</div>
-        <Button
-          onClick={() => {
-            dispatch.reviews.getReviews();
-          }}
-        >
-          Call Api
-        </Button>
-        <Link to={`/review-form/${review.vendorUuid}/${review.name}`}>
-          Review a Vendor
-        </Link>
+        <div>
+          <Divider style={{ marginTop: "20px" }} />
+          {review.comments.map(comment => (
+            <div style={{ marginTop: "30px" }} key={comment.text}>
+              <Typography component="h4">{comment.authorName}</Typography>
+              <p style={{ marginLeft: "10px" }}>"{comment.text}"</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   ) : null;

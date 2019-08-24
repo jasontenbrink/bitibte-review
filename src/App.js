@@ -7,20 +7,21 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
-import Badge from "@material-ui/core/Badge";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import NotificationsIcon from "@material-ui/icons/Notifications";
-import Review from "./Review";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { Provider } from "react-redux";
+import AccountCircle from "@material-ui/icons/AccountCircle";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import { BrowserRouter as Router } from "react-router-dom";
+import { Provider, useSelector } from "react-redux";
 import store, { dispatch } from "./store";
 import VendorsList from "./VendorsList";
-import ReviewForm from "./ReviewForm";
 import Routes from "./Routes";
+import TopNavButton from "./components/TopNavButton";
+import TopNav from "./TopNav";
 
 // import { mainListItems, secondaryListItems } from "./listItems";
 
@@ -114,35 +115,40 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function Dashboard() {
+export default function Dashboard(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  function handleClick1(event) {
+    setAnchorEl(event.currentTarget);
+  }
+
+  function handleClose() {
+    setAnchorEl(null);
+  }
   const handleDrawerOpen = () => {
     setOpen(true);
   };
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+  const fixedHeightPaper = clsx(classes.paper);
 
   useEffect(() => {
-    console.log("call api");
-    dispatch.reviews.getReviews();
+    dispatch.reviews.getReviewsAndSetSelected();
     dispatch.questions.getQuestions();
-  });
+  }, []);
 
   return (
     <div className={classes.root}>
       <CssBaseline />
       <Provider store={store}>
         <Router>
-          <AppBar position="absolute" className={clsx(classes.appBar)}>
+          <TopNav />
+          {/* <AppBar position="absolute" className={clsx(classes.appBar)}>
             <Toolbar className={classes.toolbar}>
-              Reviews of software recruiting, staffing and consulting agencies
-              <Link to="/poo">poo</Link>
-              <Link to="/review-form">Review a Vendor</Link>
-              <Link to="/"> Home</Link>
-              <div style={{ color: "white" }}>Add a vendor</div>
               <IconButton
                 edge="start"
                 color="inherit"
@@ -162,15 +168,30 @@ export default function Dashboard() {
                 noWrap
                 className={classes.title}
               >
-                Dashboard
+                Bit-Byte Review
               </Typography>
-              <IconButton color="inherit">
-                <Badge badgeContent={4} color="secondary">
-                  <NotificationsIcon />
-                </Badge>
+
+              <TopNavButton to="/">Reviews</TopNavButton>
+              <TopNavButton to="/articles">Articles</TopNavButton>
+              <TopNavButton to="/new-vednor">Suggest a New Vendor</TopNavButton>
+              <IconButton color="inherit" onClick={handleClick1}>
+                <AccountCircle />
               </IconButton>
+              <Menu
+                id="simple-menu"
+                anchorEl={anchorEl}
+                keepMounted
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={handleClose} disabled>
+                  Hello [signed in user]
+                </MenuItem>
+                <MenuItem onClick={handleClose}>Log In</MenuItem>
+                <MenuItem onClick={handleClose}>Logout</MenuItem>
+              </Menu>
             </Toolbar>
-          </AppBar>
+          </AppBar> */}
           <Drawer
             variant="permanent"
             classes={{

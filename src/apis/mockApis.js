@@ -6,6 +6,11 @@ export default {
   },
   getQuestions() {
     return new Promise(resolve => setTimeout(() => resolve(questions), 100));
+  },
+  postReview(payload) {
+    return new Promise(resolve =>
+      setTimeout(() => resolve({ statusCode: 200 }))
+    );
   }
 };
 
@@ -127,6 +132,10 @@ const reviews = [
           "did you end up getting placed through the vendor? (should be a percentage instead of stars)",
         stars: 2
       }
+    ],
+    comments: [
+      { authorName: "user1", authorUuid: "123", text: "this is a comment" },
+      { authorName: "user2", authorUuid: "222", text: "this is a comment2" }
     ]
   },
   {
@@ -188,6 +197,10 @@ const reviews = [
           "did you end up getting placed through the vendor? (should be a percentage instead of stars)",
         stars: 2
       }
+    ],
+    comments: [
+      { authorName: "user3", authorUuid: "333", text: "this is a comment3" },
+      { authorName: "user4", authorUuid: "444", text: "this is a comment4" }
     ]
   }
 ];

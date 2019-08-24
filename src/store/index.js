@@ -12,14 +12,14 @@ const store = init({
         }
       },
       effects: dispatch => ({
-        async getReviews(payload, rootState) {
+        async getReviewsAndSetSelected(payload, rootState) {
           // api call for getting reviews
           const reviews = await apis.getReviews();
           dispatch.reviews.setReviews(reviews);
+          dispatch.selectedReview.setSelectedReview(reviews[0].uuid);
         },
         async postReview(payload, rootState) {
           const response = await apis.postReview(payload);
-          // dispatch isLoading false?
         }
       })
     },
@@ -43,6 +43,34 @@ const store = init({
           const questions = await apis.getQuestions();
           console.log(payload, rootState);
           dispatch.questions.setQuestions(questions);
+        }
+      })
+    },
+    user: {
+      state: {
+        loggedIn: false,
+        username: "",
+        firstName: "",
+        lastName: "",
+        userUuid: "",
+        email: ""
+      },
+      // state: {
+      //   loggedIn: true,
+      //   username: "bison",
+      //   firstName: "Jason",
+      //   lastName: "Tenbrink",
+      //   userUuid: "1111",
+      //   email: "jason@awesome.com"
+      // },
+      reducers: {
+        setUser(state, payload) {
+          return payload;
+        }
+      },
+      effects: dispatch => ({
+        async login(payload, rootState) {
+          await apis.login(payload);
         }
       })
     }

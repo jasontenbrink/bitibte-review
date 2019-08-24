@@ -7,6 +7,14 @@ import { dispatch } from "../store";
 import Divider from "@material-ui/core/Divider";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import DashboardIcon from "@material-ui/icons/Dashboard";
+import MakeStars from "../components/MakeStars";
+
+function calcAverageStars(review) {
+  const sum = review.questions.reduce((total, question) => {
+    return (total += question.stars);
+  }, 0);
+  return sum / review.questions.length;
+}
 
 function VendorsList({ reviews }) {
   return (
@@ -31,6 +39,7 @@ function VendorsList({ reviews }) {
               style={{ marginLeft: "10px" }}
               primary={review.name}
             />
+            {MakeStars(calcAverageStars(review))}
           </ListItem>
         </React.Fragment>
       ))}
