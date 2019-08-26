@@ -16,6 +16,7 @@ function makeStars(starsCount) {
 }
 function Review({ review, history, ...rest }) {
   const user = useSelector(state => state.user);
+
   return review ? (
     <div>
       <div
@@ -29,9 +30,7 @@ function Review({ review, history, ...rest }) {
         <Button
           color="primary"
           onClick={() => {
-            user.loggedIn
-              ? history.push(`/review-form/${review.vendorUuid}/${review.name}`)
-              : history.push(`/login`);
+            history.push(`/review-form/${review.vendorUuid}/${review.name}`);
           }}
         >
           Review this Vendor

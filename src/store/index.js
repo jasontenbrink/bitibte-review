@@ -70,9 +70,24 @@ const store = init({
       },
       effects: dispatch => ({
         async login(payload, rootState) {
-          await apis.login(payload);
+          dispatch.call.setCall({ isfetching: true, error: "" });
+          try {
+            const result = await apis.login(payload);
+            dispatch.user.setUser({ ...result, loggedIn: true });
+            dispatch.call.setCall({ isfetching: false, error: "" });
+          } catch (e) {
+            dispatch.call.setCall({ isfetching: false, error: e });
+          }
         }
       })
+    },
+    call: {
+      state: { isfetching: false, error: "" },
+      reducers: {
+        setCall(state, payload) {
+          return payload;
+        }
+      }
     }
   },
   redux: {

@@ -49,8 +49,6 @@ function ReviewForm(props) {
   );
   const [comment, setComment] = useState("");
 
-  console.log("form props", props);
-
   return (
     <div>
       <div style={{ fontSize: "20px" }}>{props.vendorName}</div>

@@ -99,7 +99,6 @@ function TopNav({ history }) {
   const [open, setOpen] = useState(true);
 
   const user = useSelector(state => state.user);
-  console.log("user", user);
   const [anchorEl, setAnchorEl] = useState(null);
 
   function handleClick1(event) {
@@ -164,7 +163,14 @@ function TopNav({ history }) {
             <MenuItem onClick={handleClose}>Logout</MenuItem>
           ) : null}
           {user.loggedIn ? null : (
-            <MenuItem onClick={() => history.push("/login")}>Log In</MenuItem>
+            <MenuItem
+              onClick={() => {
+                history.push("/login");
+                handleClose();
+              }}
+            >
+              Log In
+            </MenuItem>
           )}
         </Menu>
       </Toolbar>

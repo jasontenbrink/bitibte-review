@@ -9,8 +9,27 @@ export default {
   },
   postReview(payload) {
     return new Promise(resolve =>
-      setTimeout(() => resolve({ statusCode: 200 }))
+      setTimeout(() => resolve({ statusCode: 200 }), 200)
     );
+  },
+  login(payload) {
+    return new Promise(resolve =>
+      setTimeout(
+        () =>
+          resolve({
+            statusCode: 200,
+            username: "bison",
+            firstName: "Jason",
+            lastName: "Tenbrink",
+            userUuid: "1111",
+            email: "jason@awesome.com"
+          }),
+        200
+      )
+    );
+    // return new Promise((resolve, reject) =>
+    //   setTimeout(() => reject("invalid login credentials"), 200)
+    // );
   }
 };
 

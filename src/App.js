@@ -147,51 +147,6 @@ export default function Dashboard(props) {
       <Provider store={store}>
         <Router>
           <TopNav />
-          {/* <AppBar position="absolute" className={clsx(classes.appBar)}>
-            <Toolbar className={classes.toolbar}>
-              <IconButton
-                edge="start"
-                color="inherit"
-                aria-label="Open drawer"
-                onClick={handleDrawerOpen}
-                className={clsx(
-                  classes.menuButton,
-                  open && classes.menuButtonHidden
-                )}
-              >
-                <MenuIcon />
-              </IconButton>
-              <Typography
-                component="h1"
-                variant="h6"
-                color="inherit"
-                noWrap
-                className={classes.title}
-              >
-                Bit-Byte Review
-              </Typography>
-
-              <TopNavButton to="/">Reviews</TopNavButton>
-              <TopNavButton to="/articles">Articles</TopNavButton>
-              <TopNavButton to="/new-vednor">Suggest a New Vendor</TopNavButton>
-              <IconButton color="inherit" onClick={handleClick1}>
-                <AccountCircle />
-              </IconButton>
-              <Menu
-                id="simple-menu"
-                anchorEl={anchorEl}
-                keepMounted
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={handleClose} disabled>
-                  Hello [signed in user]
-                </MenuItem>
-                <MenuItem onClick={handleClose}>Log In</MenuItem>
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
-              </Menu>
-            </Toolbar>
-          </AppBar> */}
           <Drawer
             variant="permanent"
             classes={{
