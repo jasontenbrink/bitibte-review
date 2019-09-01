@@ -1,13 +1,16 @@
 import React from "react";
-import { connect, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Route, Redirect, Switch } from "react-router-dom";
 import ReviewForm from "../ReviewForm";
 import Review from "../Review";
 import Login from "../Login";
-import Typography from "@material-ui/core/Typography";
+import Registration from "../Registration";
+import ForgotPassword from "../ForgotPassword";
+import SuggestVendor from "../SuggestVendor";
+import UserReviews from "../UserReviews";
+import EditReview from "../EditReview";
 
 const Routes = () => {
-  const reviews = useSelector(state => state.reviews);
   const questions = useSelector(state => state.questions);
   const user = useSelector(state => state.user);
 
@@ -15,6 +18,11 @@ const Routes = () => {
     <Switch>
       <Route path="/" exact component={Review} />
       <Route path="/login" component={Login} />
+      <Route path="/suggest-vendor" component={SuggestVendor} />
+      <Route path="/your-reviews" component={UserReviews} />
+      <Route path="/registration" component={Registration} />
+      <Route path="/forgot-password" component={ForgotPassword} />
+      <Route path="/edit-review/:reviewUuid" component={EditReview} />
       <Route
         path="/review-form/:vendorUuid/:vendorName"
         render={props => {

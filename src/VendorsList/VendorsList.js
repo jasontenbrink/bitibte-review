@@ -8,6 +8,7 @@ import Divider from "@material-ui/core/Divider";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import MakeStars from "../components/MakeStars";
+import { withRouter } from "react-router-dom";
 
 function calcAverageStars(review) {
   const sum = review.questions.reduce((total, question) => {
@@ -16,7 +17,7 @@ function calcAverageStars(review) {
   return sum / review.questions.length;
 }
 
-function VendorsList({ reviews }) {
+function VendorsList({ reviews, history }) {
   return (
     <List>
       <ListItem>
@@ -30,10 +31,10 @@ function VendorsList({ reviews }) {
           <Divider />
           <ListItem
             button
-            onClick={
-              //call setSelected review
-              () => dispatch.selectedReview.setSelectedReview(review.uuid)
-            }
+            onClick={() => {
+              dispatch.selectedReview.setSelectedReview(review.uuid);
+              history.push("/");
+            }}
           >
             <ListItemText
               style={{ marginLeft: "10px" }}
@@ -50,4 +51,4 @@ function VendorsList({ reviews }) {
 const mapStateToProps = state => ({
   reviews: state.reviews
 });
-export default connect(mapStateToProps)(VendorsList);
+export default connect(mapStateToProps)(withRouter(VendorsList));

@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
@@ -111,9 +111,6 @@ function TopNav({ history }) {
   const handleDrawerOpen = () => {
     setOpen(true);
   };
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
 
   return (
     <AppBar position="absolute" className={clsx(classes.appBar)}>
@@ -139,7 +136,7 @@ function TopNav({ history }) {
 
         <TopNavButton to="/">Reviews</TopNavButton>
         <TopNavButton to="/articles">Articles</TopNavButton>
-        <TopNavButton to="/new-vendor">Suggest a New Vendor</TopNavButton>
+        <TopNavButton to="/suggest-vendor">Suggest a New Vendor</TopNavButton>
         <IconButton color="inherit" onClick={handleClick1}>
           <AccountCircle />
         </IconButton>
@@ -151,18 +148,25 @@ function TopNav({ history }) {
           onClose={handleClose}
         >
           {user.loggedIn ? (
-            <Fragment>
-              <MenuItem onClick={handleClose} disabled>
+            [
+              <MenuItem key="1" disabled>
                 Hello, {user.username}!
+              </MenuItem>,
+              <Divider key="2" />,
+              <MenuItem key="3" onClick={handleClose}>
+                Logout
+              </MenuItem>,
+              <MenuItem
+                key="4"
+                onClick={() => {
+                  handleClose();
+                  history.push("/your-reviews");
+                }}
+              >
+                Your Reviews
               </MenuItem>
-              <Divider />
-            </Fragment>
-          ) : null}
-
-          {user.loggedIn ? (
-            <MenuItem onClick={handleClose}>Logout</MenuItem>
-          ) : null}
-          {user.loggedIn ? null : (
+            ]
+          ) : (
             <MenuItem
               onClick={() => {
                 history.push("/login");

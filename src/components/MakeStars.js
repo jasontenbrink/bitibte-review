@@ -9,5 +9,6 @@ export default function makeStars(starsCount) {
   }
   partialStar &&
     stars.push(<StarRate style={{ color: "lightgreen" }} key={starsCount} />);
+
   return stars;
 }

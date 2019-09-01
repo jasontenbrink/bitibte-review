@@ -1,8 +1,8 @@
 import React from "react";
 import StarRate from "@material-ui/icons/StarRate";
 import Divider from "@material-ui/core/Divider";
-import { connect, useSelector } from "react-redux";
-import { Button, Typography } from "@material-ui/core";
+import { connect } from "react-redux";
+import Button from "@material-ui/core/Button";
 
 function makeStars(starsCount) {
   const stars = [];
@@ -15,8 +15,6 @@ function makeStars(starsCount) {
   return stars;
 }
 function Review({ review, history, ...rest }) {
-  const user = useSelector(state => state.user);
-
   return review ? (
     <div>
       <div
@@ -61,7 +59,7 @@ function Review({ review, history, ...rest }) {
           <Divider style={{ marginTop: "20px" }} />
           {review.comments.map(comment => (
             <div style={{ marginTop: "30px" }} key={comment.text}>
-              <Typography component="h4">{comment.authorName}</Typography>
+              {/* <Typography component="h4">{comment.authorName}</Typography> */}
               <p style={{ marginLeft: "10px" }}>"{comment.text}"</p>
             </div>
           ))}
