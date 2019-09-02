@@ -9,6 +9,7 @@ import ForgotPassword from "../ForgotPassword";
 import SuggestVendor from "../SuggestVendor";
 import UserReviews from "../UserReviews";
 import EditReview from "../EditReview";
+import Home from "../Home";
 
 const Routes = () => {
   const questions = useSelector(state => state.questions);
@@ -16,7 +17,8 @@ const Routes = () => {
 
   return (
     <Switch>
-      <Route path="/" exact component={Review} />
+      <Route path="/" exact component={Home} />
+      <Route path="/reviews" exact component={Review} />
       <Route path="/login" component={Login} />
       <Route path="/suggest-vendor" component={SuggestVendor} />
       <Route path="/your-reviews" component={UserReviews} />

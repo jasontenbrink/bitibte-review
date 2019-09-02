@@ -33,7 +33,7 @@ function VendorsList({ reviews, history }) {
             button
             onClick={() => {
               dispatch.selectedReview.setSelectedReview(review.uuid);
-              history.push("/");
+              history.push("/reviews");
             }}
           >
             <ListItemText

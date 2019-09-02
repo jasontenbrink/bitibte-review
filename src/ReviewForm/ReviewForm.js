@@ -104,7 +104,7 @@ function ReviewForm(props) {
               comment,
               vendorUuid: props.vendorUuid
             });
-            props.history.push("/");
+            props.history.push("/reviews");
           }}
         >
           Submit

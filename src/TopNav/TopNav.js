@@ -134,7 +134,7 @@ function TopNav({ history }) {
           Bit-Byte Review
         </Typography>
 
-        <TopNavButton to="/">Reviews</TopNavButton>
+        <TopNavButton to="/reviews">Reviews</TopNavButton>
         <TopNavButton to="/articles">Articles</TopNavButton>
         <TopNavButton to="/suggest-vendor">Suggest a New Vendor</TopNavButton>
         <IconButton color="inherit" onClick={handleClick1}>

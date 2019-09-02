@@ -17,7 +17,9 @@ function Registration({ history }) {
   const user = useSelector(state => state.user);
   useEffect(() => {
     const { location, goBack, push } = history;
-    const navFunc = location.isRedirect ? () => goBack() : () => push("/");
+    const navFunc = location.isRedirect
+      ? () => goBack()
+      : () => push("/reviews");
     user.loggedIn && navFunc();
   }, [user.loggedIn, history]); // history included for eslint
 
