@@ -19,13 +19,14 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     fontSize: "32pt",
-    fontWeight: "lighter"
+    fontWeight: "lighter",
+    letterSpacing: "1px"
   },
   word: { margin: theme.spacing(0, 10, 5, 0) },
   text: {
     letterSpacing: "2px",
-    fontFamily: "Letter Gothic",
-    margin: theme.spacing(0, 10, 5, 0)
+    fontFamily: "Letter Gothic"
+    // margin: theme.spacing(0, 10, 5, 0)
   },
   avatar: {
     margin: theme.spacing(1),
@@ -42,7 +43,12 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(2)
   }
 }));
-
+const style = {
+  letterSpacing: "1px",
+  fontWeight: "lighter",
+  marginTop: "40px",
+  marginLeft: "50px"
+};
 function Home() {
   const classes = useStyles();
   return (
@@ -50,19 +56,25 @@ function Home() {
       <div className={classes.paper}>
         <Typography className={classes.title} component="p" variant="h5">
           Bit-Byte Review
-        </Typography>
-        <div style={{ marginTop: "30px" }}>
-          <Grid container justify="flex-start">
-            <Typography className={classes.text}>
-              Reviews of software recruiting, staffing and consulting agencies
-            </Typography>
-          </Grid>
-          <Grid container justify="flex-start">
-            <Typography className={classes.text}>
-              Software Developers leave reviews, which are aggregated and
-              presented to the community
-            </Typography>
-          </Grid>
+        </Typography>{" "}
+        <Grid container justify="flex-start">
+          {/* <div style={{ marginTop: "30px" }}> */}
+          {/* <Grid container justify="flex-start"> */}
+          <Typography style={{ ...style, marginTop: "60px" }}>
+            Reviews of software recruiting, staffing and consulting agencies in
+            the Twin Cities.
+          </Typography>
+          {/* </Grid> */}
+          {/* <Grid container justify="flex-start"> */}
+          <Typography style={style}>
+            Software Developers leave reviews, which are aggregated and
+            presented to the community.
+          </Typography>
+          <Typography style={style}>
+            A simple way for software developers to elevate those with
+            exceptional honesty, integrity and skill in serving our community.
+          </Typography>
+          {/* </Grid> */}
           {/* <Grid container justify="flex-start">
             <Typography className={classes.word}>Who</Typography>
             <Typography className={classes.text}>
@@ -70,7 +82,8 @@ function Home() {
               experiences and help excellent recruiters stand out.
             </Typography>
           </Grid> */}
-        </div>
+          {/* </div> */}
+        </Grid>
       </div>
     </Container>
   );
