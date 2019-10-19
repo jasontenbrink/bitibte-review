@@ -15,7 +15,7 @@ import { dispatch } from "../store";
 
 function calcAverageStars(review) {
   const sum = review.questions.reduce((total, question) => {
-    return (total += question.stars);
+    return (total += question);
   }, 0);
   return sum / review.questions.length;
 }
@@ -47,7 +47,7 @@ function UserReviews({ history }) {
           {/* End hero unit */}
           <Grid container spacing={4}>
             {user.reviews.map(review => (
-              <Grid item key={review.uuid} xs={12} sm={6} md={4}>
+              <Grid item key={review.id} xs={12} sm={6} md={4}>
                 <Card className={classes.card}>
                   <CardHeader
                     title={review.name}
@@ -65,8 +65,7 @@ function UserReviews({ history }) {
                         size="small"
                         color="primary"
                         onClick={() => {
-                          dispatch.user.deleteReview(review.uuid);
-                          // dispatch action to call delete api, delete it from the store.
+                          dispatch.user.deleteReview(review.id);
                         }}
                       >
                         Delete
@@ -75,7 +74,7 @@ function UserReviews({ history }) {
                         size="small"
                         color="primary"
                         onClick={() => {
-                          history.push(`/edit-review/${review.uuid}`);
+                          history.push(`/edit-review/${review.id}`);
                           //navigate to edit review page
                         }}
                       >

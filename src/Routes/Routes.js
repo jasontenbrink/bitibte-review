@@ -6,6 +6,7 @@ import Review from "../Review";
 import Login from "../Login";
 import Registration from "../Registration";
 import ForgotPassword from "../ForgotPassword";
+import Profile from "../Profile";
 import SuggestVendor from "../SuggestVendor";
 import UserReviews from "../UserReviews";
 import EditReview from "../EditReview";
@@ -24,19 +25,20 @@ const Routes = () => {
       <Route path="/your-reviews" component={UserReviews} />
       <Route path="/registration" component={Registration} />
       <Route path="/forgot-password" component={ForgotPassword} />
-      <Route path="/edit-review/:reviewUuid" component={EditReview} />
+      <Route path="/profile" component={Profile} />
+      <Route path="/edit-review/:reviewId" component={EditReview} />
       <Route
-        path="/review-form/:vendorUuid/:vendorName"
+        path="/review-form/:vendorId/:vendorName"
         render={props => {
           if (user.loggedIn) {
-            const { vendorUuid, vendorName } = props.match.params;
-            return questions.length > 0 ? (
+            const { vendorId, vendorName } = props.match.params;
+            return (
               <ReviewForm
-                vendorUuid={vendorUuid}
+                vendorId={vendorId}
                 vendorName={vendorName}
                 history={props.history}
               />
-            ) : null;
+            );
           }
           return (
             <Redirect

@@ -5,6 +5,7 @@ import StarRate from "@material-ui/icons/StarRate";
 import Divider from "@material-ui/core/Divider";
 import { dispatch } from "../store";
 import { Button, TextField } from "@material-ui/core";
+import { starQuestions as questionsText } from "../utils";
 
 function makeStars(setQuestions, questionNumber, questions) {
   const stars = [];
@@ -38,25 +39,25 @@ function makeStars(setQuestions, questionNumber, questions) {
 }
 
 function EditReview({ match, history }) {
-  const review = useSelector(state =>
-    state.user.reviews.find(review => {
-      return review.uuid === match.params.reviewUuid;
-    })
-  );
-  const { vendorName, questions, comment, vendorUuid } = review;
+  const review = useSelector(state => {
+    return state.user.reviews.find(review => {
+      return review.id == match.params.reviewId;
+    });
+  });
+  console.log("review", review);
+  const { name, questions, comment, id, vendorId } = review;
   const [formQuestions, setQuestions] = useState(
-    questions.map(question => ({
-      text: question.text,
-      coloredStars: question.stars,
-      hasStaticStars: true,
-      uuid: question.uuid
+    questions.map((question, index) => ({
+      text: questionsText[index],
+      coloredStars: question,
+      hasStaticStars: true
     }))
   );
   const [formComment, setComment] = useState(comment);
 
   return (
     <div>
-      <div style={{ fontSize: "20px" }}>{vendorName}</div>
+      <div style={{ fontSize: "20px" }}>{name}</div>
 
       <div>
         <Divider />
@@ -102,12 +103,13 @@ function EditReview({ match, history }) {
             console.log("questions", {
               questions: formQuestions,
               comment: formComment,
-              vendorUuid
+              id
             });
             dispatch.reviews.updateReview({
               questions: formQuestions,
               comment: formComment,
-              vendorUuid
+              id,
+              vendorId
             });
             history.push("/your-reviews");
           }}

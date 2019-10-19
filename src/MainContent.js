@@ -118,7 +118,7 @@ function MainContent(props) {
 
   useEffect(() => {
     dispatch.reviews.getReviewsAndSetSelected();
-    dispatch.questions.getQuestions();
+    // dispatch.questions.getQuestions();
   }, []);
 
   return (

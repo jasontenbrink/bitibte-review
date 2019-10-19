@@ -12,8 +12,9 @@ import { withRouter } from "react-router-dom";
 
 function calcAverageStars(review) {
   const sum = review.questions.reduce((total, question) => {
-    return (total += question.stars);
+    return (total += question);
   }, 0);
+  console.log(sum, review.questions.length);
   return sum / review.questions.length;
 }
 
@@ -27,12 +28,12 @@ function VendorsList({ reviews, history }) {
         <ListItemText primary="Vendors" />
       </ListItem>
       {reviews.map(review => (
-        <React.Fragment key={review.uuid}>
+        <React.Fragment key={review.vendorId}>
           <Divider />
           <ListItem
             button
             onClick={() => {
-              dispatch.selectedReview.setSelectedReview(review.uuid);
+              dispatch.selectedReview.setSelectedReview(review.vendorId);
               history.push("/reviews");
             }}
           >

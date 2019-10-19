@@ -29,6 +29,7 @@ export function updateForm(e, formState, setFormState, validators) {
   const field = e.target.name;
   const value = e.target.value;
   const validator = validators[field];
+  console.log("formstate", formState);
 
   const newFormState = {
     ...formState,
@@ -38,7 +39,7 @@ export function updateForm(e, formState, setFormState, validators) {
     },
     errors: {
       ...formState.errors,
-      [field]: validator(value)
+      [field]: validator(value, formState)
     }
   };
 

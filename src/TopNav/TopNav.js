@@ -13,6 +13,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import TopNavButton from "../components/TopNavButton";
 import { Divider } from "@material-ui/core";
 import { withRouter } from "react-router-dom";
+import { dispatch } from "../store";
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
@@ -150,20 +151,35 @@ function TopNav({ history }) {
           {user.loggedIn ? (
             [
               <MenuItem key="1" disabled>
-                Hello, {user.username}!
+                Hello, {user.firstName}!
               </MenuItem>,
               <Divider key="2" />,
-              <MenuItem key="3" onClick={handleClose}>
-                Logout
-              </MenuItem>,
               <MenuItem
-                key="4"
+                key="3"
                 onClick={() => {
                   handleClose();
                   history.push("/your-reviews");
                 }}
               >
                 Your Reviews
+              </MenuItem>,
+              <MenuItem
+                key="4"
+                onClick={() => {
+                  handleClose();
+                  history.push("/profile");
+                }}
+              >
+                Your Profile
+              </MenuItem>,
+              <MenuItem
+                key="5"
+                onClick={() => {
+                  dispatch.user.logout();
+                  handleClose();
+                }}
+              >
+                Logout
               </MenuItem>
             ]
           ) : (
