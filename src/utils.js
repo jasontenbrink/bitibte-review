@@ -5,12 +5,16 @@ export const starQuestions = [
   "was the vendor knowledgable of the local job market?",
   "Did the vendor put in the effort to get to know you? (Didn't show you front end jobs if you didn't want to do front end)",
   "Does the vendor treat minorities well?",
-  "Did the vendor advocate to get you the pay rate you wanted?"
+  "Did the vendor advocate to get you the pay rate you wanted?",
+  "Did the vendor consistently get you interviews?"
 ];
 export const numberQuestions = [
-  "How many interviews did the vendor get you per week?(this shouldn't be a stars q.  It should display a number)",
-  "did you end up getting placed through the vendor? (should be a percentage instead of star)",
-  "If you were placed through this vendor, how many weeks between the time the time you started working with the vendor and landing a job?"
+  "How many interviews did the vendor get you per week?",
+  "If you were placed through this vendor, how many weeks between the time you started working with the vendor and landing a job?"
+];
+
+export const booleanQuestions = [
+  "did you end up getting placed through the vendor?"
 ];
 //"Did the vendor deal with you fairly?",
 

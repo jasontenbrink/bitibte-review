@@ -5,7 +5,7 @@ import StarRate from "@material-ui/icons/StarRate";
 import Divider from "@material-ui/core/Divider";
 import { dispatch } from "../store";
 import { Button, TextField } from "@material-ui/core";
-import { starQuestions as questionsText } from "../utils";
+import { starQuestions } from "../utils";
 
 function makeStars(setQuestions, questionNumber, questions) {
   const stars = [];
@@ -47,9 +47,9 @@ function EditReview({ match, history }) {
   console.log("review", review);
   const { name, questions, comment, id, vendorId } = review;
   const [formQuestions, setQuestions] = useState(
-    questions.map((question, index) => ({
-      text: questionsText[index],
-      coloredStars: question,
+    starQuestions.map((question, index) => ({
+      text: question,
+      coloredStars: questions[index],
       hasStaticStars: true
     }))
   );

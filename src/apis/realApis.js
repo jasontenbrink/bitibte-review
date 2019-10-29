@@ -1,47 +1,48 @@
-import Axios from "axios";
+import axios from "axios";
 
-const axios = Axios.create({
-  baseURL: "http://localhost:5000/api"
-});
+// uncomment the below when you are working locally using the react dev server
+// import Axios from "axios";
+// const axios = Axios.create({
+//   baseURL: "http://localhost:5000"
+// });
 
 export default {
   async getReviews() {
-    const { data } = await axios.get("/reviews");
+    const { data } = await axios.get("/api/reviews");
     return data;
   },
   async postReview(payload) {
-    const { data } = await axios.post("/reviews", payload);
+    const { data } = await axios.post("/api/reviews", payload);
     return data;
     // returns statusCode 200
   },
   async login(payload) {
-    const { data } = await axios.post("/login", payload);
+    const { data } = await axios.post("/api/login", payload);
     return data;
   },
   async logout() {
-    return await axios.get("/logout");
+    return await axios.get("/api/logout");
   },
   async register(payload) {
-    return await axios.get("/registration", payload);
+    return await axios.get("/api/registration", payload);
   },
   async resetPassword(payload) {
-    return await axios.get("/reset-password", payload);
+    return await axios.get("/api/reset-password", payload);
   },
   async changePassword(payload) {
-    return await axios.post("/change-password", payload);
+    return await axios.post("/api/change-password", payload);
   },
   async suggestVendor(payload) {
-    return await axios.get("/suggest-vendor");
+    return await axios.get("/api/suggest-vendor");
   },
   async provideFeedback(payload) {
-    return await axios.get("/feedback");
+    return await axios.get("/api/feedback");
   },
   async updateReview(payload) {
-    const { data } = await axios.put("/reviews", payload);
+    const { data } = await axios.put("/api/reviews", payload);
     return data;
   },
   async deleteReview(payload) {
-    console.log("dlete", payload);
-    return await axios.delete("/reviews", { params: payload });
+    return await axios.delete("/api/reviews", { params: payload });
   }
 };

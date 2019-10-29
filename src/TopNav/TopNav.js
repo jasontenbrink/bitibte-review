@@ -126,17 +126,19 @@ function TopNav({ history }) {
           <MenuIcon />
         </IconButton>
         <Typography
+          style={{ cursor: "pointer" }}
           component="h1"
           variant="h6"
           color="inherit"
           noWrap
           className={classes.title}
+          onClick={() => history.push("/")}
         >
-          Bit-Byte Review
+          BitByte Review
         </Typography>
 
         <TopNavButton to="/reviews">Reviews</TopNavButton>
-        <TopNavButton to="/articles">Articles</TopNavButton>
+        {/* <TopNavButton to="/articles">Articles</TopNavButton> */}
         <TopNavButton to="/suggest-vendor">Suggest a New Vendor</TopNavButton>
         <IconButton color="inherit" onClick={handleClick1}>
           <AccountCircle />

@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 // import ReviewFormAutocomplete from "./ReviewFormAutocomplete";
-import { connect } from "react-redux";
 import StarRate from "@material-ui/icons/StarRate";
 import Divider from "@material-ui/core/Divider";
 import { dispatch } from "../store";
 import { Button, TextField } from "@material-ui/core";
-import { starQuestions, numberQuestions } from "../utils";
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormControl from "@material-ui/core/FormControl";
+import { starQuestions, numberQuestions, booleanQuestions } from "../utils";
 const approve = require("approvejs");
 
 function makeStars(setQuestions, questionNumber, questions) {
@@ -52,6 +55,9 @@ function ReviewForm(props) {
   const [formNumberQuestions, setNumberQuestions] = useState(
     numberQuestions.map(question => ({ text: question, value: "" }))
   );
+  const [formBooleanQuestions, setFormBooleanQuestions] = useState(
+    booleanQuestions.map(question => ({ text: question, value: "" }))
+  );
   return (
     <div>
       <div style={{ fontSize: "20px" }}>{props.vendorName}</div>
@@ -78,8 +84,51 @@ function ReviewForm(props) {
             );
           })}
         </div>
-        <div style={{ marginLeft: "10px" }}>
-          {formNumberQuestions.map((question, questionNumber) => {
+        {/* {formBooleanQuestions.map(question => {
+          return (
+            <div key={question.text} style={{ marginLeft: "10px" }}>
+              <FormControl
+                component="div"
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  marginTop: "20px"
+                }}
+              >
+                <div>{question.text}</div>
+                <RadioGroup
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    position: "relative",
+                    top: "-10px",
+                    marginLeft: "15px"
+                  }}
+                  aria-label="gender"
+                  name="gender1"
+                  value={question.value}
+                  onChange={e => {
+                    question.value = e.target.value;
+                    setFormBooleanQuestions([...formBooleanQuestions]);
+                  }}
+                >
+                  <FormControlLabel
+                    value={"true"}
+                    control={<Radio />}
+                    label="Yes"
+                  />
+                  <FormControlLabel
+                    value={"false"}
+                    control={<Radio />}
+                    label="No"
+                  />
+                </RadioGroup>
+              </FormControl>
+            </div>
+          );
+        })} */}
+        {/* <div style={{ marginLeft: "10px" }}> */}
+        {/* {formNumberQuestions.map((question, questionNumber) => {
             return (
               <div style={{ marginTop: "20px" }} key={question.text}>
                 <span style={{ maxWidth: "70%", display: "inline-block" }}>
@@ -88,27 +137,27 @@ function ReviewForm(props) {
 
                 <TextField
                   style={{
-                    verticalAlign: "middle",
+                    verticalAlign: "top",
                     width: "75px",
                     marginLeft: "10px",
                     marginBottom: "0px",
-                    marginTop: "0px"
+                    marginTop: "0px",
+                    padding: "0px"
                   }}
+                  InputProps={{ style: { height: "37px" } }}
                   id="outlined-multiline-flexible"
                   fullWidth={false}
                   multiline
                   rowsMax="4"
                   value={question.value}
                   onChange={e => {
-                    const validatedValue = approve.value(
-                      parseInt(e.target.value),
-                      {
-                        numeric: true,
-                        range: { min: 0, max: 100 }
-                      }
-                    );
+                    const value = parseInt(e.target.value);
+                    const validatedValue = approve.value(value, {
+                      numeric: true,
+                      range: { min: 0, max: 100 }
+                    });
                     if (validatedValue.approved) {
-                      question.value = e.target.value;
+                      question.value = value;
                       setNumberQuestions([...formNumberQuestions]);
                     }
                     if (e.target.value === "") {
@@ -117,15 +166,13 @@ function ReviewForm(props) {
                     }
                   }}
                   className={null}
-                  min="0"
-                  max="100"
                   margin="normal"
                   variant="outlined"
                 />
               </div>
             );
-          })}
-        </div>
+          })} */}
+        {/* </div> */}
         <div style={{ marginLeft: "10px", marginTop: "20px", maxWidth: "85%" }}>
           <div>Additional Comments:</div>
           <TextField

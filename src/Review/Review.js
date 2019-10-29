@@ -47,7 +47,7 @@ function Review({ review, history, ...rest }) {
                 <span
                   style={{
                     position: "relative",
-                    top: "5px",
+                    top: "7px",
                     marginLeft: "15px"
                   }}
                 >
@@ -56,6 +56,48 @@ function Review({ review, history, ...rest }) {
               </div>
             );
           })}
+        {/* {review &&
+          booleanQuestions.map((question, index) => {
+            return (
+              <div style={{ marginTop: "20px" }} key={question.text}>
+                <span style={{ maxWidth: "70%", display: "inline-block" }}>
+                  {question}
+                </span>
+                <span
+                  style={{
+                    position: "relative",
+                    top: "0px",
+                    marginLeft: "15px",
+                    fontWeight: "bold",
+                    fontSize: "14pt"
+                  }}
+                >
+                  {review.questions[index]}
+                </span>
+              </div>
+            );
+          })} */}
+        {/* {review &&
+          numberQuestions.map((question, index) => {
+            return (
+              <div style={{ marginTop: "20px" }} key={question.text}>
+                <span style={{ maxWidth: "70%", display: "inline-block" }}>
+                  {question}
+                </span>
+                <span
+                  style={{
+                    position: "relative",
+                    top: "0px",
+                    marginLeft: "15px",
+                    fontWeight: "bold",
+                    fontSize: "14pt"
+                  }}
+                >
+                  {review.questions[index]}
+                </span>
+              </div>
+            );
+          })} */}
         <div>
           <Divider style={{ marginTop: "20px" }} />
           {review.comments.map((comment, index) => (

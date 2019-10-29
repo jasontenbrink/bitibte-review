@@ -5,6 +5,7 @@ import logger from "redux-logger";
 import { starQuestions } from "../utils";
 
 function questionScoresToArray(objectWithQuestions) {
+  console.log("object with questions", objectWithQuestions);
   const {
     question1,
     question2,
@@ -14,12 +15,13 @@ function questionScoresToArray(objectWithQuestions) {
     question6,
     question7,
     question8,
-    question9,
-    question10,
+    // question9,
+    // question10,
     ...newObjectWithQuestions
   } = objectWithQuestions;
+  console.log("newobjectWithQuestions", newObjectWithQuestions);
   const questions = [];
-  for (let i = 1; i < 11; i++) {
+  for (let i = 1; i < 9; i++) {
     questions.push(parseFloat(objectWithQuestions["question" + i]));
   }
   newObjectWithQuestions.questions = questions;
@@ -41,20 +43,20 @@ function questionScoresToObject(objectWithScores) {
 }
 
 const initialUserState = {
-  // loggedIn: false,
-  // username: "",
-  // firstName: "",
-  // lastName: "",
-  // userUuid: "",
-  // email: "",
-  // reviews: []
-  loggedIn: true,
+  loggedIn: false,
   username: "",
   firstName: "",
   lastName: "",
   userUuid: "",
   email: "",
   reviews: []
+  // loggedIn: true,
+  // username: "",
+  // firstName: "",
+  // lastName: "",
+  // userUuid: "",
+  // email: "",
+  // reviews: []
 };
 
 const store = init({
@@ -171,7 +173,7 @@ const store = init({
         async register(payload, rootState) {
           dispatch.call.setCall({ isfetching: true, error: "" });
           try {
-            const result = await apis.login(payload);
+            const result = await apis.register(payload);
             dispatch.user.setUser({ ...result, loggedIn: true });
             dispatch.call.setCall({ isfetching: false, error: "" });
           } catch (e) {

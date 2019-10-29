@@ -15,8 +15,10 @@ import { dispatch } from "../store";
 
 function calcAverageStars(review) {
   const sum = review.questions.reduce((total, question) => {
+    console.log('total, question', total, question)
     return (total += question);
   }, 0);
+  console.log(review.vendorId, sum / review.questions.length);
   return sum / review.questions.length;
 }
 
