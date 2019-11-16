@@ -24,7 +24,7 @@ export default {
     return await axios.get("/api/logout");
   },
   async register(payload) {
-    return await axios.get("/api/registration", payload);
+    return await axios.post("/api/registration", payload);
   },
   async resetPassword(payload) {
     return await axios.get("/api/reset-password", payload);

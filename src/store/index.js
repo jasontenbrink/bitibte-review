@@ -173,11 +173,19 @@ const store = init({
         async register(payload, rootState) {
           dispatch.call.setCall({ isfetching: true, error: "" });
           try {
-            const result = await apis.register(payload);
-            dispatch.user.setUser({ ...result, loggedIn: true });
-            dispatch.call.setCall({ isfetching: false, error: "" });
+            const { data } = await apis.register(payload);
+            // dispatch.user.setUser({ ...result, loggedIn: true });
+            if (data == "Registration Successful") {
+              dispatch.app.setNotifcation({
+                notification: "Registration Successful!\nYou can now log in."
+              });
+              dispatch.call.setCall({ isfetching: false, error: "" });
+            } else throw "Error while registering";
           } catch (e) {
             dispatch.call.setCall({ isfetching: false, error: e });
+            dispatch.app.setNotifcation({
+              notification: "Registration Unsuccessful."
+            });
           }
         },
         async resetPassword(payload, rootState) {

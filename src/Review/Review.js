@@ -100,12 +100,14 @@ function Review({ review, history, ...rest }) {
           })} */}
         <div>
           <Divider style={{ marginTop: "20px" }} />
-          {review.comments.map((comment, index) => (
-            <div style={{ marginTop: "30px" }} key={index}>
-              {/* <Typography component="h4">{comment.authorName}</Typography> */}
-              <p style={{ marginLeft: "10px" }}>"{comment}"</p>
-            </div>
-          ))}
+          {review.comments
+            .filter(comment => comment)
+            .map((comment, index) => (
+              <div style={{ marginTop: "30px" }} key={index}>
+                {/* <Typography component="h4">{comment.authorName}</Typography> */}
+                <p style={{ marginLeft: "10px" }}>"{comment}"</p>
+              </div>
+            ))}
         </div>
       </div>
     </div>
